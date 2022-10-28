@@ -23,7 +23,9 @@
  * Define Global Variables
  * 
 */
-
+var nav = document.getElementById('navbar__list');
+var div = document.createElement('div');
+var sections = document.querySelectorAll('section');
 
 /**
  * End Global Variables
@@ -40,6 +42,12 @@
 */
 
 // build the nav
+for (let i = sections.length; i > 0 ; i--) {
+     var li = document.createElement('li');
+     li.innerHTML=("Section"+i+" ");
+     nav.appendChild(li);
+    
+}
 
 
 // Add class 'active' to section when near top of viewport
