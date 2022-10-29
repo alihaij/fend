@@ -7,7 +7,9 @@
  * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
  *
 */
-
+/* html {
+    scroll-behavior: smooth;
+  } */
 
 /* ---- Base Rules ---- */
 body {
@@ -72,6 +74,7 @@ section {
 
 .navbar__menu li {
     display: inline-block;
+    
 }
 
 .navbar__menu .menu__link {
@@ -197,9 +200,7 @@ section.your-active-class {
     background: rgb(0, 0, 0);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
-li{
-    color: #000;
-}
+
 
 section.your-active-class .landing__container::before {
     opacity: 1;

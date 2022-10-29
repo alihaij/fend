@@ -27,6 +27,8 @@ var nav = document.getElementById('navbar__list');
 var div = document.createElement('div');
 var sections = document.querySelectorAll('section');
 
+
+
 /**
  * End Global Variables
  * Start Helper Functions
@@ -42,27 +44,42 @@ var sections = document.querySelectorAll('section');
 */
 
 // build the nav
-for (let i = sections.length; i > 0 ; i--) {
+for (let i = sections.length; i > 0; i--) {
      var li = document.createElement('li');
-     li.innerHTML=("Section"+i+" ");
+     var a = document.createElement('a');
+     a.classList.add("menu__link");
+     a.innerHTML = ("Section" + i);
      nav.appendChild(li);
-    
+     a.setAttribute('data-link','section' + i)
+     li.appendChild(a);
 }
+
+
 
 
 // Add class 'active' to section when near top of viewport
 
 
 // Scroll to anchor ID using scrollTO event
+const links = document.querySelectorAll('.menu__link');
+// console.log(links);
+links.forEach((item) => {
+     item.addEventListener("click", () => {
+          const el = document.getElementById(item.getAttribute("data-link"));
+          el.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+     })
+
+}
+);
 
 
 /**
  * End Main Functions
  * Begin Events
- * 
+ *
 */
 
-// Build menu 
+// Build menu
 
 // Scroll to section on link click
 
