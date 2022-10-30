@@ -34,6 +34,22 @@ var sections = document.querySelectorAll('section');
  * Start Helper Functions
  * 
 */
+function isInViewport(el) {
+     const rect = el.getBoundingClientRect();
+     return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+
+     );
+}
+
+
+// const section3 = document.querySelector('#section3');
+// const activeCalss = document.querySelector('');
+
+
 
 
 
@@ -49,8 +65,8 @@ for (let i = sections.length; i > 0; i--) {
      var a = document.createElement('a');
      a.classList.add("menu__link");
      a.innerHTML = ("Section" + i);
-     nav.appendChild(li);
-     a.setAttribute('data-link','section' + i)
+     nav.append(li);
+     a.setAttribute('data-link', 'section' + i)
      li.appendChild(a);
 }
 
@@ -59,6 +75,17 @@ for (let i = sections.length; i > 0; i--) {
 
 // Add class 'active' to section when near top of viewport
 
+document.addEventListener('scroll', function () {
+     sections.forEach(sec =>{
+           isInViewport(sec) ? 
+           sec.classList.add('your-active-class'): 
+           sec.classList.remove('your-active-class'); 
+          })
+
+
+}, {
+     passive: true
+});
 
 // Scroll to anchor ID using scrollTO event
 const links = document.querySelectorAll('.menu__link');
@@ -66,11 +93,12 @@ const links = document.querySelectorAll('.menu__link');
 links.forEach((item) => {
      item.addEventListener("click", () => {
           const el = document.getElementById(item.getAttribute("data-link"));
-          el.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+          el.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
      })
 
 }
 );
+
 
 
 /**
