@@ -23,9 +23,10 @@
  * Define Global Variables
  * 
 */
-var nav = document.getElementById('navbar__list');
-var div = document.createElement('div');
-var sections = document.querySelectorAll('section');
+const nav = document.getElementById('navbar__list');
+const div = document.createElement('div');
+const sections = document.querySelectorAll('section');
+
 
 
 
@@ -61,43 +62,51 @@ function isInViewport(el) {
 
 // build the nav
 for (let i = sections.length; i > 0; i--) {
-     var li = document.createElement('li');
-     var a = document.createElement('a');
+     const li = document.createElement('li');
+     const a = document.createElement('a');
      a.classList.add("menu__link");
      a.innerHTML = ("Section" + i);
+     a.setAttribute('id', 'section' + i + '-link');
      nav.append(li);
-     a.setAttribute('data-link', 'section' + i)
+     a.setAttribute('data-link', 'section' + i);
      li.appendChild(a);
 }
 
 
-
-
-// Add class 'active' to section when near top of viewport
-
-document.addEventListener('scroll', function () {
-     sections.forEach(sec =>{
-           isInViewport(sec) ? 
-           sec.classList.add('your-active-class'): 
-           sec.classList.remove('your-active-class'); 
-          })
-
-
-}, {
-     passive: true
-});
 
 // Scroll to anchor ID using scrollTO event
 const links = document.querySelectorAll('.menu__link');
 // console.log(links);
 links.forEach((item) => {
      item.addEventListener("click", () => {
+          item.classList.toggle('active');
           const el = document.getElementById(item.getAttribute("data-link"));
           el.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
      })
 
 }
 );
+
+// Add class 'active' to section when near top of viewport
+
+document.addEventListener('scroll', function () {
+     sections.forEach(sec => {
+          if (isInViewport(sec)) {
+               el = document.getElementById(sec.getAttribute('id') + '-link'),
+                    el.classList.add('active'),
+                    sec.classList.add('your-active-class')
+          }
+          else {
+               sec.classList.remove('your-active-class');
+               el = document.getElementById(sec.getAttribute('id') + '-link'),
+               el.classList.remove('active')    }
+     });
+
+
+}, {
+     passive: true
+});
+
 
 
 
